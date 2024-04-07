@@ -1,6 +1,5 @@
 services:
     sio_test:
-        user: app
         build:
             context: .
             args:

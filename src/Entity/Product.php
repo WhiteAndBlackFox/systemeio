@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -64,12 +64,12 @@ class Product
     /**
      * @return Collection<int, OrderProduct>
      */
-    public function getOrderProducts(): Collection
+    public function getOrderProducts() : Collection
     {
         return $this->orderProducts;
     }
 
-    public function addOrderProduct(OrderProduct $orderProduct): static
+    public function addOrderProduct(OrderProduct $orderProduct) : static
     {
         if (!$this->orderProducts->contains($orderProduct)) {
             $this->orderProducts->add($orderProduct);
@@ -79,7 +79,7 @@ class Product
         return $this;
     }
 
-    public function removeOrderProduct(OrderProduct $orderProduct): static
+    public function removeOrderProduct(OrderProduct $orderProduct) : static
     {
         if ($this->orderProducts->removeElement($orderProduct)) {
             // set the owning side to null (unless already changed)

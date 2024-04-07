@@ -1,3 +1,13 @@
+### Login - need get jwt token
+POST http://127.0.0.1:8337/api/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "admin@admin.com",
+  "password": "admin"
+}
+
 ### Calculate Price
 POST http://127.0.0.1:8337/calculate-price
 Accept: application/json

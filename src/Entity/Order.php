@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\OrderRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\OrderRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
@@ -44,65 +44,65 @@ class Order
         $this->orderProducts = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId() : ?int
     {
         return $this->id;
     }
 
-    public function getOrderDate(): ?\DateTimeImmutable
+    public function getOrderDate() : ?\DateTimeImmutable
     {
         return $this->orderDate;
     }
 
-    public function setOrderDate(\DateTimeImmutable $orderDate): static
+    public function setOrderDate(\DateTimeImmutable $orderDate) : static
     {
         $this->orderDate = $orderDate;
 
         return $this;
     }
 
-    public function getStatusId(): ?int
+    public function getStatusId() : ?int
     {
         return $this->status_id;
     }
 
-    public function setStatusId(int $status_id): static
+    public function setStatusId(int $status_id) : static
     {
         $this->status_id = $status_id;
 
         return $this;
     }
 
-    public function getTotalPrice(): ?float
+    public function getTotalPrice() : ?float
     {
         return $this->totalPrice;
     }
 
-    public function setTotalPrice(float $totalPrice): static
+    public function setTotalPrice(float $totalPrice) : static
     {
         $this->totalPrice = $totalPrice;
 
         return $this;
     }
 
-    public function isDeleted(): ?bool
+    public function isDeleted() : ?bool
     {
         return $this->isDeleted;
     }
 
-    public function setDeleted(bool $isDeleted): static
+    public function setDeleted(bool $isDeleted) : static
     {
         $this->isDeleted = $isDeleted;
 
         return $this;
     }
 
-    public function getOwner(): ?User
+    public function getOwner() : ?User
     {
         return $this->owner;
     }
 
-    public function setOwner(?User $owner): static
+    public function setOwner(?User $owner) : static
     {
         $this->owner = $owner;
 
@@ -112,12 +112,12 @@ class Order
     /**
      * @return Collection<int, OrderProduct>
      */
-    public function getOrderProducts(): Collection
+    public function getOrderProducts() : Collection
     {
         return $this->orderProducts;
     }
 
-    public function addOrderProduct(OrderProduct $orderProduct): static
+    public function addOrderProduct(OrderProduct $orderProduct) : static
     {
         if (!$this->orderProducts->contains($orderProduct)) {
             $this->orderProducts->add($orderProduct);
@@ -127,7 +127,7 @@ class Order
         return $this;
     }
 
-    public function removeOrderProduct(OrderProduct $orderProduct): static
+    public function removeOrderProduct(OrderProduct $orderProduct) : static
     {
         if ($this->orderProducts->removeElement($orderProduct)) {
             // set the owning side to null (unless already changed)

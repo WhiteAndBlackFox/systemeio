@@ -6,5 +6,7 @@ usermod -u $(stat -c '%u' /app) -g $(stat -c '%u' /app) www-data
 test -f /app/vendor/autoload.php || composer install
 
 php bin/console doctrine:migrations:migrate
+php bin/console doctrine:fixtures:load
+php bin/console lexik:jwt:generate-keypair --skip-if-exists
 
 php -S 0.0.0.0:8337 -t public

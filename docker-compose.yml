@@ -8,5 +8,28 @@ services:
             - "8337:8337"
         volumes:
             - .:/app:rw
+        networks:
+            - systemeio
+        depends_on:
+            - db
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+    db:
+        image: mariadb:10.9.2
+        networks:
+            - systemeio
+        ports:
+            - 3306:3306
         environment:
-            - APP_ENV=dev
+            MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+            MYSQL_DATABASE: "${DB_DATABASE}"
+            LANG: C.UTF-8
+            LC_ALL: C.UTF-8
+        command: sh -c 'echo "[client]\nuser=root\npassword=${DB_PASSWORD}" > /root/.my.cnf && docker-entrypoint.sh mysqld'
+        volumes:
+            - "${PWD:-./}:/app"
+            - "dbdata:/var/lib/mysql"
+networks:
+    systemeio:
+volumes:
+    dbdata:

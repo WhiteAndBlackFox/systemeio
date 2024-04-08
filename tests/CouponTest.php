@@ -2,16 +2,39 @@
 
 namespace App\Tests;
 
-use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
-
-class CouponTest extends ApiTestCase
+class CouponTest extends TokenTestCase
 {
-
-    public function testSomething() : void
+    public function testCouponIsValidate(): void
     {
-        $response = static::createClient()->request('POST', '/api/coupon-validate');
+        static::createClient()
+            ->request('POST', '/api/coupon-validate', [
+                'headers' => [
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                    'Authorization' => $this->token,
+                ],
+                'json' => [
+                    'coupon' => "P10",
+                ]
+            ]);
 
         $this->assertResponseIsSuccessful();
-        $this->assertJsonContains(['@id' => '/']);
+    }
+
+    public function testCouponIsNotValidate(): void
+    {
+        static::createClient()
+            ->request('POST', '/api/coupon-validate', [
+                'headers' => [
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                    'Authorization' => $this->token,
+                ],
+                'json' => [
+                    'coupon' => "P20",
+                ]
+            ]);
+
+        $this->assertResponseStatusCodeSame(404);
     }
 }

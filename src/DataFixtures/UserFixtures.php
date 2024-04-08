@@ -13,7 +13,6 @@ class UserFixtures extends Fixture
     {
     }
 
-
     public function load(ObjectManager $manager) : void
     {
         $count = $manager->getRepository(User::class)->count();
@@ -23,8 +22,8 @@ class UserFixtures extends Fixture
 
         $model = new User();
         $model->setEmail('admin@admin.com');
-        $model->setRoles(["ROLE_ADMIN"]);
-        $model->setPassword($this->userPasswordHasher->hashPassword($model, "admin"));
+        $model->setRoles(['ROLE_ADMIN']);
+        $model->setPassword($this->userPasswordHasher->hashPassword($model, 'admin'));
         $manager->persist($model);
         $manager->flush();
     }

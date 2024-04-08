@@ -21,9 +21,9 @@ class CouponRepository extends ServiceEntityRepository
         parent::__construct($registry, Coupon::class);
     }
 
-    public function findNotExpiredCouponByCode(?string $code): ?Coupon
+    public function findNotExpiredCouponByCode(?string $code) : ?Coupon
     {
-        return  $this->createQueryBuilder('c')
+        return $this->createQueryBuilder('c')
             ->andWhere('c.code = :code_coupon')
             ->andWhere(':now >= c.validFrom')
             ->andWhere(':now <= c.validTo')

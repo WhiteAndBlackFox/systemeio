@@ -8,7 +8,7 @@ class TokenTestCase extends ApiTestCase
 {
     public string $token;
 
-    protected function setUp(): void
+    protected function setUp() : void
     {
         $response = static::createClient()
             ->request('POST', 'http://127.0.0.1:8337/api/login', [
@@ -19,7 +19,7 @@ class TokenTestCase extends ApiTestCase
                 'json' => [
                     'email' => 'admin@admin.com',
                     'password' => 'admin',
-                ]
+                ],
             ]);
 
         $response = json_decode($response->getContent());

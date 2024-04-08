@@ -2,8 +2,8 @@
 
 namespace App\Entity\Enum;
 
-enum CouponType: int
+enum CouponType : int
 {
-    const TYPE_PERCENT = 1;
-    const TYPE_FIXED = 2;
+    public const TYPE_PERCENT = 1;
+    public const TYPE_FIXED = 2;
 }

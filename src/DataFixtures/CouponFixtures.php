@@ -38,7 +38,7 @@ class CouponFixtures extends Fixture
                 'type' => CouponType::TYPE_PERCENT,
                 'valid_from' => new \DateTimeImmutable('2024-01-01'),
                 'valid_to' => new \DateTimeImmutable('2024-01-30'),
-            ]
+            ],
         ];
 
         foreach ($couponPayload as $coupon) {

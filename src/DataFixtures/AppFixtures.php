@@ -17,7 +17,6 @@ class AppFixtures extends Fixture
             ProductFixtures::class,
             TaxRateFixtures::class,
             UserFixtures::class,
-
         ];
     }
 }

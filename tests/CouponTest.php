@@ -4,7 +4,7 @@ namespace App\Tests;
 
 class CouponTest extends TokenTestCase
 {
-    public function testCouponIsValidate(): void
+    public function testCouponIsValidate() : void
     {
         static::createClient()
             ->request('POST', '/api/coupon-validate', [
@@ -14,14 +14,14 @@ class CouponTest extends TokenTestCase
                     'Authorization' => $this->token,
                 ],
                 'json' => [
-                    'coupon' => "P10",
-                ]
+                    'coupon' => 'P10',
+                ],
             ]);
 
         $this->assertResponseIsSuccessful();
     }
 
-    public function testCouponIsNotValidate(): void
+    public function testCouponIsNotValidate() : void
     {
         static::createClient()
             ->request('POST', '/api/coupon-validate', [
@@ -31,8 +31,8 @@ class CouponTest extends TokenTestCase
                     'Authorization' => $this->token,
                 ],
                 'json' => [
-                    'coupon' => "P20",
-                ]
+                    'coupon' => 'P20',
+                ],
             ]);
 
         $this->assertResponseStatusCodeSame(404);

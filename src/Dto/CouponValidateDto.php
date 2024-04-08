@@ -9,7 +9,6 @@ final class CouponValidateDto
     public function __construct(
         #[Assert\NotBlank]
         public readonly ?string $coupon
-    )
-    {
+    ) {
     }
 }

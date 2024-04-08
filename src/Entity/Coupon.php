@@ -58,7 +58,7 @@ class Coupon
         return $this;
     }
 
-    public function isType() : ?bool
+    public function getType() : ?int
     {
         return $this->type;
     }

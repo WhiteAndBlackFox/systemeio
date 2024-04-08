@@ -23,7 +23,7 @@ class TaxRate
     private ?bool $isActive = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $country_code = null;
+    private ?string $countryCode = null;
 
     public function getId() : ?int
     {
@@ -68,12 +68,12 @@ class TaxRate
 
     public function getCountryCode() : ?string
     {
-        return $this->country_code;
+        return $this->countryCode;
     }
 
-    public function setCountryCode(string $country_code) : static
+    public function setCountryCode(string $countryCode) : static
     {
-        $this->country_code = $country_code;
+        $this->countryCode = $countryCode;
 
         return $this;
     }

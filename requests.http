@@ -24,11 +24,12 @@ Authorization: Bearer {{auth_token}}
 POST http://127.0.0.1:8337/api/calculate-price
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "product": 1,
   "taxNumber": "DE123456789",
-  "couponCode": "D15"
+  "couponCode": "P10"
 }
 
 ### Execute Purchase

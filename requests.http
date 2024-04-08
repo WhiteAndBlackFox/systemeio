@@ -8,8 +8,20 @@ Content-Type: application/json
   "password": "admin"
 }
 
+> {% client.global.set("auth_token", response.body.token); %}
+
+### Check coupon
+POST http://127.0.0.1:8337/api/coupon-validate
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "coupon": "P20"
+}
+
 ### Calculate Price
-POST http://127.0.0.1:8337/calculate-price
+POST http://127.0.0.1:8337/api/calculate-price
 Accept: application/json
 Content-Type: application/json
 
@@ -20,7 +32,7 @@ Content-Type: application/json
 }
 
 ### Execute Purchase
-POST http://127.0.0.1:8337/purchase
+POST http://127.0.0.1:8337/api/purchase
 Accept: application/json
 Content-Type: application/json
 

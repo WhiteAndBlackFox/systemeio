@@ -10,19 +10,23 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/api', name: 'api_')]
+#[Route('/api/product', name: 'api_')]
 class ProductController extends AbstractController
 {
+    public function __construct(private PriceCalculator $priceCalculator)
+    {
+    }
+
     #[Route('/calculate-price', name: 'app_calculate_price')]
     public function calculatePrice(
         #[MapRequestPayload]
         CalculatePriceDto $calculatePriceDto,
         EntityManagerInterface $em
     ) : JsonResponse {
-        $priceCalculator = new PriceCalculator($em);
-
         return new JsonResponse([
-            'price' => $priceCalculator->calculatePrice($calculatePriceDto),
+            'price' => $this->priceCalculator
+                ->setEntityManagerInterface($em)
+                ->calculatePrice($calculatePriceDto),
         ]);
     }
 }

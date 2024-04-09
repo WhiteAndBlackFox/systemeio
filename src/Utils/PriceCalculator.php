@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class PriceCalculator
 {
-    public function __construct(private EntityManagerInterface $em)
+    public function __construct(private ?EntityManagerInterface $em)
     {
     }
 
@@ -48,5 +48,12 @@ final class PriceCalculator
         $priceDiscount = $price - $discount;
 
         return $priceDiscount + ($priceDiscount * $taxRate->getRate() / 100);
+    }
+
+    public function setEntityManagerInterface(EntityManagerInterface $em) : self
+    {
+        $this->em = $em;
+
+        return $this;
     }
 }

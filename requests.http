@@ -11,7 +11,7 @@ Content-Type: application/json
 > {% client.global.set("auth_token", response.body.token); %}
 
 ### Check coupon
-POST http://127.0.0.1:8337/api/coupon-validate
+POST http://127.0.0.1:8337/api/coupon/validate
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
@@ -21,7 +21,7 @@ Authorization: Bearer {{auth_token}}
 }
 
 ### Calculate Price
-POST http://127.0.0.1:8337/api/calculate-price
+POST http://127.0.0.1:8337/api/product/calculate-price
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}

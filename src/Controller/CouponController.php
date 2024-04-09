@@ -13,10 +13,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 /**
  * Coupon controller.
  */
-#[Route('/api', name: 'api_')]
+#[Route('/api/coupon', name: 'api_')]
 class CouponController extends AbstractController
 {
-    #[Route('/coupon-validate', name: 'app_coupon_check', methods: ['POST'])]
+    #[Route('/validate', name: 'app_coupon_check', methods: ['POST'])]
     public function validate(
         #[MapRequestPayload]
         CouponValidateDto $couponValidateDto,

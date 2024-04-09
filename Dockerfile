@@ -25,7 +25,9 @@ RUN pecl install yaml && docker-php-ext-enable yaml
 
 RUN set -xe \
   && pecl install xdebug \
+  && pecl install redis \
   && docker-php-ext-enable xdebug \
+  && docker-php-ext-enable redis \
   && docker-php-ext-configure pdo_mysql --with-pdo-mysql \
   && docker-php-ext-install -j$(nproc) \
     opcache \

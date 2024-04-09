@@ -21,6 +21,18 @@ class OrderProductRepository extends ServiceEntityRepository
         parent::__construct($registry, OrderProduct::class);
     }
 
+    public function getTotalPrice(int $orderId) : float
+    {
+        $result = $this->createQueryBuilder('op')
+            ->select('SUM(op.pricePerOne * op.quantity) as total_price')
+            ->where('op.order = :orderId')
+            ->setParameter('orderId', $orderId)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $result['total_price'] ?? 0.0;
+    }
+
     //    /**
     //     * @return OrderProduct[] Returns an array of OrderProduct objects
     //     */

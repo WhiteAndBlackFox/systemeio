@@ -17,7 +17,7 @@ class ProductController extends AbstractController
     {
     }
 
-    #[Route('/calculate-price', name: 'app_calculate_price')]
+    #[Route('/calculate-price', name: 'app_calculate_price', methods: ['POST'])]
     public function calculatePrice(
         #[MapRequestPayload]
         CalculatePriceDto $calculatePriceDto,

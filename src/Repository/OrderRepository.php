@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Order;
+use App\Entity\Enum\OrderStatus;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -19,6 +20,29 @@ class OrderRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Order::class);
+    }
+
+    public function getCreatedOrderByUserId(?int $userId) : ?Order
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.owner = :user')
+            ->andWhere('o.status_id = :status')
+            ->andWhere('o.isDeleted = false')
+            ->setParameter('user', $userId)
+            ->setParameter('status', OrderStatus::STATUS_CREATED)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function updateTotalPrice(float $totalPrice, int $orderId) : void
+    {
+        $this->createQueryBuilder('o')->update()
+            ->set('o.totalPrice', ':totalPrice')
+            ->where('o.id', ':orderId')
+            ->setParameter('totalPrice', $totalPrice)
+            ->setParameter('orderId', $orderId)
+            ->getQuery()
+            ->execute();
     }
 
     //    /**

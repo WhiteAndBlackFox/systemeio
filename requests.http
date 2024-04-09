@@ -32,6 +32,19 @@ Authorization: Bearer {{auth_token}}
   "couponCode": "P10"
 }
 
+### Add product to order
+POST http://127.0.0.1:8337/api/order/add
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "product": 1,
+  "taxNumber": "DE123456789",
+  "couponCode": "P10",
+  "quantity": 1
+}
+
 ### Execute Purchase
 POST http://127.0.0.1:8337/api/purchase
 Accept: application/json

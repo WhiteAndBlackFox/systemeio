@@ -12,6 +12,7 @@ services:
             - systemeio
         depends_on:
             - db
+            - redis
         extra_hosts:
             - "host.docker.internal:host-gateway"
     db:
@@ -29,6 +30,14 @@ services:
         volumes:
             - "${PWD:-./}:/app"
             - "dbdata:/var/lib/mysql"
+    redis:
+        image: redis:latest
+        networks:
+            - systemeio
+        ports:
+            - 6379:6379
+        command: redis-server --requirepass secret
+
 networks:
     systemeio:
 volumes:

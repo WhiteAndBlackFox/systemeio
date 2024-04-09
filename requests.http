@@ -46,13 +46,11 @@ Authorization: Bearer {{auth_token}}
 }
 
 ### Execute Purchase
-POST http://127.0.0.1:8337/api/purchase
+POST http://127.0.0.1:8337/api/order/purchase
 Accept: application/json
 Content-Type: application/json
 
 {
-  "product": 1,
-  "taxNumber": "IT12345678900",
-  "couponCode": "D15",
+  "order": 1,
   "paymentProcessor": "paypal"
 }

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Order;
 use App\Dto\OrderAddDto;
 use App\Entity\OrderProduct;
+use App\Dto\OrderPurchaseDto;
 use App\Utils\PriceCalculator;
 use App\Entity\Enum\OrderStatus;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,7 +23,7 @@ class OrderController extends AbstractController
     {
     }
 
-    #[Route('/add', name: 'app_order', methods: ['POST'])]
+    #[Route('/add', name: 'app_order_add', methods: ['POST'])]
     public function add(
         #[MapRequestPayload]
         OrderAddDto $orderAddDto,
@@ -61,6 +62,32 @@ class OrderController extends AbstractController
 
         return new JsonResponse([
             'message' => 'Product added to order',
+        ]);
+    }
+
+    #[Route('/purchase', name: 'app_order_purchase', methods: ['POST'])]
+    public function purchase(
+        #[MapRequestPayload]
+        OrderPurchaseDto $orderPurchaseDto,
+        EntityManagerInterface $em
+    ) : JsonResponse {
+        $order = $em->getRepository(Order::class)->findOneBy(['id' => $orderPurchaseDto->order]);
+        // use PaypalPaymentProcessor::pay with $order->getTotalPrice()
+        $resultPay = true;
+
+        if ($resultPay) {
+            $order->setStatusId(OrderStatus::STATUS_PAID);
+            $em->persist($order);
+            $em->flush();
+        }
+
+        $msg = match ($order->getStatusId()) {
+            OrderStatus::STATUS_PAID => 'Order has been paid.',
+            default => 'An error occurred during payment.'
+        };
+
+        return new JsonResponse([
+            'message' => $msg,
         ]);
     }
 }
